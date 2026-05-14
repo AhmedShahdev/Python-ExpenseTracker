@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expenses</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="table-container">
+
+        <div class="table-card">
+
+            <h2 class="table-title">All Expenses</h2>
+
+    <form method="GET" action="/expenses" class="filter-form">
+
+    <select name="category_id" class="filter-select">
+        <option value="">All Categories</option>
+
+        {% for cat in categories %}
+            <option value="{{ cat.id }}"
+                {% if selected_category == cat.id|string %}selected{% endif %}>
+                {{ cat.name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <input type="month"
+           name="month"
+           value="{{ selected_month or '' }}"
+           class="filter-month">
+
+    <button type="submit" class="filter-btn">
+        Filter
+    </button>
+
+    <a href="/expenses" class="clear-btn">
+        Clear
+    </a>
+
+</form>
+
+
+            <div class="top-links">
+                <a href="/expenses/add" class="top-btn">
+                    + Add New
+                </a>
+
+                <a href="/categories" class="top-btn secondary-btn">
+                    Categories
+                </a>
+            </div>
+
+            <table class="expense-table">
+
+                <tr>
+                    <th>ID</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Note</th>
+                    <th>Action</th>
+                </tr>
+
+                {% for e in expenses %}
+
+                <tr>
+                    <td>{{ e.id }}</td>
+                    <td>{{ e.amount }}</td>
+                    <td>{{ e.category }}</td>
+                    <td>{{ e.expense_date }}</td>
+                    <td>{{ e.note }}</td>
+
+                    <td>
+                        <a href="/expenses/delete/{{ e.id }}"
+                           class="delete-table-btn">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+</html> 

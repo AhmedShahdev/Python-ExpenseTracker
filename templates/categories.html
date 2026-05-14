@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+<body>
+
+    <div class="category-container">
+
+        <div class="category-card">
+
+            <h2 class="category-title">Categories</h2>
+
+            <form method="POST"
+                  action="/categories"
+                  class="category-form">
+
+                <input type="text"
+                       name="name"
+                       placeholder="Category name"
+                       class="category-input"
+                       required>
+
+                <button type="submit"
+                        class="category-btn">
+                    Add
+                </button>
+
+            </form>
+
+            <ul class="category-list">
+
+                {% for cat in categories %}
+
+                <li class="category-item">
+
+                    <span>
+                        {{cat.id}} - {{cat.name}}
+                    </span>
+
+                    <a href="/categories/delete/{{cat.id}}"
+                       class="delete-btn">
+                        Delete
+                    </a>
+
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

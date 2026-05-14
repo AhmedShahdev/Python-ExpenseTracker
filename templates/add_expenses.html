@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expenses</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="expense-container">
+
+        <div class="expense-card">
+
+            <h1 class="expense-title">Add Expenses</h1>
+
+            <form action="/expenses/add" method="POST" class="expense-form">
+
+                <input type="number"
+                       step="0.01"
+                       name="amount"
+                       placeholder="Enter Amount"
+                       class="expense-input"
+                       required>
+
+                <select name="category_id"
+                        class="expense-select"
+                        required>
+
+                    <option value="">Select Category</option>
+
+                    {% for cat in categories %}
+                    <option value="{{cat.id}}">
+                        {{cat.name}}
+                    </option>
+                    {% endfor %}
+
+                </select>
+
+                <input type="date"
+                       name="expense_date"
+                       class="expense-input"
+                       required>
+
+                <input type="text"
+                       name="note"
+                       placeholder="Note (optional)"
+                       class="expense-input">
+
+                <button type="submit"
+                        class="expense-btn">
+                    Add Expense
+                </button>
+
+            </form>
+
+            <a href="/categories" class="manage-link">
+                Manage Categories
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
